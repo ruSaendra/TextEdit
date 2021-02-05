@@ -17,18 +17,40 @@ namespace ConsoleApplication2
         public static void EditFile(string inputFilePath, string outputFilePath)
         {
 
-            doc = DocX.Load(inputFilePath);
-            f = new Formatting();
-            f.FontFamily = new Font("Arial");
-            f.Size = 9D;
-            tab = doc.Tables[1];
-            
-            FillCells();
-            FormatCells();
-            MergeCells();
+            if(LoadFile(inputFilePath))
+            {
+                f = new Formatting();
+                f.FontFamily = new Font("Arial");
+                f.Size = 9D;
+                tab = doc.Tables[1];
 
-            doc.SaveAs(outputFilePath);
+                FillCells();
+                FormatCells();
+                MergeCells();
 
+                try
+                {
+                    doc.SaveAs(outputFilePath);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }           
+
+        }
+
+        private static Boolean LoadFile(string inputFilePath)
+        {
+            try
+            {
+                doc = DocX.Load(inputFilePath);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
         }
 
         private static void FillCells()
