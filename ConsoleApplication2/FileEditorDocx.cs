@@ -40,7 +40,7 @@ namespace ConsoleApplication2
 
         }
 
-        private static Boolean LoadFile(string inputFilePath)
+        private static Boolean LoadFile(string inputFilePath)                           // Attempts to load the file
         {
             try
             {
@@ -53,7 +53,7 @@ namespace ConsoleApplication2
             return true;
         }
 
-        private static void FillCells()
+        private static void FillCells()                                                 // Fills required cells with text
         {
             InputTextIntoCell(1, 1, "Документ 1");
             InputTextIntoCell(1, 2, "Расписка");
@@ -71,7 +71,7 @@ namespace ConsoleApplication2
             InputTextIntoCell(7, 4, "Комментарий 3");
         }
 
-        private static void FormatCells()
+        private static void FormatCells()                                               // Changes formatting of cells
         {
             tab.Rows[1].Cells[1].Paragraphs.First().Bold().Italic();
             tab.Rows[1].Cells[2].Paragraphs.First().Italic();
@@ -80,13 +80,13 @@ namespace ConsoleApplication2
 
         }
 
-        private static void MergeCells()
+        private static void MergeCells()                                                // Merges specific cells
         {
             tab.MergeCellsInColumn(0, 1, 3);
             tab.MergeCellsInColumn(0, 4, 6);
         }
 
-        private static void InputTextIntoCell(int row, int col, string textInput)
+        private static void InputTextIntoCell(int row, int col, string textInput)       // Inputs text into a specific cell
         {
             tab.Rows[row].Cells[col].Paragraphs.First().Append(textInput, f);
         }

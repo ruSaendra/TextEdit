@@ -51,7 +51,7 @@ namespace ConsoleApplication2
             }
         }
 
-        private static Boolean LoadFile(string inputFilePath, string outputFilePath)
+        private static Boolean LoadFile(string inputFilePath, string outputFilePath)            // Attempts to load a file and create a copy to edit
         {
             try
             {
@@ -68,7 +68,7 @@ namespace ConsoleApplication2
             return true;
         }
 
-        private static void FillCells()
+        private static void FillCells()                                                         // Fills required cells with text
         {
             InputTextIntoCell(1, 1, "Документ 1");
             InputTextIntoCell(1, 2, "Расписка");
@@ -86,7 +86,7 @@ namespace ConsoleApplication2
             InputTextIntoCell(7, 4, "Комментарий 3");
         }
 
-        private static void FormatCells()
+        private static void FormatCells()                                                       // Changes formatting of cells
         {
             FormatCell(1, 1, new FStyle[] { FStyle.Bold, FStyle.Italic } );
             FormatCell(1, 2, new FStyle[] { FStyle.Italic } );
@@ -94,13 +94,13 @@ namespace ConsoleApplication2
             FormatCell(4, 4, new FStyle[] { FStyle.Bold } );
         }
 
-        private static void MergeCells()
+        private static void MergeCells()                                                        // Merges cells
         {
             CellsToMerge(0, 1, 3);
             CellsToMerge(0, 4, 6);
         }
 
-        private static void InputTextIntoCell (int row, int col, string textInput)
+        private static void InputTextIntoCell (int row, int col, string textInput)              // Inputs text into a specific cell
         {
             TableRow tRow = tab.Elements<TableRow>().ElementAt(row);
 
@@ -119,7 +119,7 @@ namespace ConsoleApplication2
             txt.Text = textInput;
         }
 
-        private static void FormatCell(int row, int col, FStyle[] styles)
+        private static void FormatCell(int row, int col, FStyle[] styles)                       // Changes formatting of a specific cell
         {
             TableRow tRow = tab.Elements<TableRow>().ElementAt(row);
 
@@ -150,7 +150,7 @@ namespace ConsoleApplication2
             }
         }
 
-        private static void CellsToMerge(int col, int rowStart, int rowEnd)
+        private static void CellsToMerge(int col, int rowStart, int rowEnd)                     // Merges a range of cells 
         {
             TableCellProperties tcPropStart = new TableCellProperties();
             tcPropStart.Append(new VerticalMerge()
@@ -175,7 +175,7 @@ namespace ConsoleApplication2
 
         }
 
-        private static RunProperties SetFormatting(string fontStyle, int fontSize)
+        private static RunProperties SetFormatting(string fontStyle, int fontSize)              // Sets cell text formatting
         {
             RunProperties rPr = new RunProperties();
 

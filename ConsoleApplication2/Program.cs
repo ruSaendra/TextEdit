@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xceed.Document.NET;
-using Xceed.Words.NET;
+﻿using System.IO;
 
 namespace ConsoleApplication2
 {
@@ -20,8 +12,8 @@ namespace ConsoleApplication2
                         
             if(File.Exists(inputFilename))
             {
-                FileEditorDocx.EditFile(inputFilename, outputFilenameDocX);
-                FileEditorOpenXml.EditFile(inputFilename, outputFilenameXml);
+                FileEditorDocx.EditFile(inputFilename, outputFilenameDocX);         // Edit using Xceed DocX library
+                FileEditorOpenXml.EditFile(inputFilename, outputFilenameXml);       // Edit using openXml library
                 
             }            
         }
