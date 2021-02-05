@@ -14,22 +14,6 @@ namespace ConsoleApplication2
         private static Formatting f;
         private static Table tab;
 
-        private FileEditorDocx()
-        {
-
-        }
-
-        private static FileEditorDocx _instance;
-
-        public static FileEditorDocx GetInstance()
-        {
-            if (_instance == null)
-            {
-                _instance = new FileEditorDocx();
-            }
-            return _instance;
-        }
-
         public static void EditFile(string inputFilePath, string outputFilePath)
         {
 
@@ -49,20 +33,20 @@ namespace ConsoleApplication2
 
         private static void FillCells()
         {
-            tab.Rows[1].Cells[1].Paragraphs.First().Append("Документ 1", f);
-            tab.Rows[1].Cells[2].Paragraphs.First().Append("Расписка", f);
-            tab.Rows[1].Cells[3].Paragraphs.First().Append("2", f);
-            tab.Rows[1].Cells[4].Paragraphs.First().Append("Комментарий 1", f);
+            InputTextIntoCell(1, 1, "Документ 1");
+            InputTextIntoCell(1, 2, "Расписка");
+            InputTextIntoCell(1, 3, "2");
+            InputTextIntoCell(1, 4, "Комментарий 1");
 
-            tab.Rows[4].Cells[1].Paragraphs.First().Append("Документ 2", f);
-            tab.Rows[4].Cells[2].Paragraphs.First().Append("Расписка", f);
-            tab.Rows[4].Cells[3].Paragraphs.First().Append("1", f);
-            tab.Rows[4].Cells[4].Paragraphs.First().Append("Комментарий 2", f);
+            InputTextIntoCell(4, 1, "Документ 2");
+            InputTextIntoCell(4, 2, "Расписка");
+            InputTextIntoCell(4, 3, "1");
+            InputTextIntoCell(4, 4, "Комментарий 2");
 
-            tab.Rows[7].Cells[1].Paragraphs.First().Append("Документ 3", f);
-            tab.Rows[7].Cells[2].Paragraphs.First().Append("Расписка", f);
-            tab.Rows[7].Cells[3].Paragraphs.First().Append("1", f);
-            tab.Rows[7].Cells[4].Paragraphs.First().Append("Комментарий 3", f);
+            InputTextIntoCell(7, 1, "Документ 3");
+            InputTextIntoCell(7, 2, "Расписка");
+            InputTextIntoCell(7, 3, "1");
+            InputTextIntoCell(7, 4, "Комментарий 3");
         }
 
         private static void FormatCells()
@@ -78,6 +62,11 @@ namespace ConsoleApplication2
         {
             tab.MergeCellsInColumn(0, 1, 3);
             tab.MergeCellsInColumn(0, 4, 6);
+        }
+
+        private static void InputTextIntoCell(int row, int col, string textInput)
+        {
+            tab.Rows[row].Cells[col].Paragraphs.First().Append(textInput, f);
         }
     }
 }
