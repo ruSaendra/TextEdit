@@ -7,3 +7,4 @@ C:\Users\Saendra\documents\visual studio 2015\Projects\ConsoleApplication2\Conso
 C:\Users\Saendra\documents\visual studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\bin\Release\DocumentFormat.OpenXml.xml
 C:\Users\Saendra\documents\visual studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\obj\Release\ConsoleApplication2.exe
 C:\Users\Saendra\documents\visual studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\obj\Release\ConsoleApplication2.pdb
+C:\Users\Saendra\documents\visual studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\obj\Release\ConsoleApplication2.csprojResolveAssemblyReference.cache

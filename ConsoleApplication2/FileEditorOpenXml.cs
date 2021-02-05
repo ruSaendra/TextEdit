@@ -70,20 +70,10 @@ namespace ConsoleApplication2
 
         private static void FillCells()                                                         // Fills required cells with text
         {
-            InputTextIntoCell(1, 1, "Документ 1");
-            InputTextIntoCell(1, 2, "Расписка");
-            InputTextIntoCell(1, 3, "2");
-            InputTextIntoCell(1, 4, "Комментарий 1");
+            InputTextIntoRow(1, "Документ 1", "Расписка", 2, "Комментарий 1");
+            InputTextIntoRow(4, "Документ 2", "Расписка", 1, "Комментарий 2");
+            InputTextIntoRow(7, "Документ 3", "Расписка", 1, "Комментарий 3");
 
-            InputTextIntoCell(4, 1, "Документ 2");
-            InputTextIntoCell(4, 2, "Расписка");
-            InputTextIntoCell(4, 3, "1");
-            InputTextIntoCell(4, 4, "Комментарий 3");
-
-            InputTextIntoCell(7, 1, "Документ 3");
-            InputTextIntoCell(7, 2, "Расписка");
-            InputTextIntoCell(7, 3, "1");
-            InputTextIntoCell(7, 4, "Комментарий 3");
         }
 
         private static void FormatCells()                                                       // Changes formatting of cells
@@ -98,6 +88,14 @@ namespace ConsoleApplication2
         {
             CellsToMerge(0, 1, 3);
             CellsToMerge(0, 4, 6);
+        }
+
+        private static void InputTextIntoRow (int row, string docName, string docType, int qty, string comment)
+        {
+            InputTextIntoCell(row, 1, docName);
+            InputTextIntoCell(row, 2, docType);
+            InputTextIntoCell(row, 3, qty.ToString());
+            InputTextIntoCell(row, 4, comment);
         }
 
         private static void InputTextIntoCell (int row, int col, string textInput)              // Inputs text into a specific cell

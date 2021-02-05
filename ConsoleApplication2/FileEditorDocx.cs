@@ -55,20 +55,9 @@ namespace ConsoleApplication2
 
         private static void FillCells()                                                 // Fills required cells with text
         {
-            InputTextIntoCell(1, 1, "Документ 1");
-            InputTextIntoCell(1, 2, "Расписка");
-            InputTextIntoCell(1, 3, "2");
-            InputTextIntoCell(1, 4, "Комментарий 1");
-
-            InputTextIntoCell(4, 1, "Документ 2");
-            InputTextIntoCell(4, 2, "Расписка");
-            InputTextIntoCell(4, 3, "1");
-            InputTextIntoCell(4, 4, "Комментарий 2");
-
-            InputTextIntoCell(7, 1, "Документ 3");
-            InputTextIntoCell(7, 2, "Расписка");
-            InputTextIntoCell(7, 3, "1");
-            InputTextIntoCell(7, 4, "Комментарий 3");
+            FillRow(1, "Документ 1", "Расписка", 2, "Комментарий 1");
+            FillRow(4, "Документ", "Расписка", 1, "Комментарий 2");
+            FillRow(7, "Документ", "Расписка", 1, "Комментарий 3");
         }
 
         private static void FormatCells()                                               // Changes formatting of cells
@@ -86,9 +75,12 @@ namespace ConsoleApplication2
             tab.MergeCellsInColumn(0, 4, 6);
         }
 
-        private static void InputTextIntoCell(int row, int col, string textInput)       // Inputs text into a specific cell
+        private static void FillRow(int row, string docName, string docType, int qty, string comment)        // Inputs text into cells in a row
         {
-            tab.Rows[row].Cells[col].Paragraphs.First().Append(textInput, f);
+            tab.Rows[row].Cells[1].Paragraphs.First().Append(docName, f);
+            tab.Rows[row].Cells[2].Paragraphs.First().Append(docType, f);
+            tab.Rows[row].Cells[3].Paragraphs.First().Append(qty.ToString(), f);
+            tab.Rows[row].Cells[4].Paragraphs.First().Append(comment, f);
         }
     }
 }
