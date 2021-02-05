@@ -23,48 +23,49 @@ namespace ConsoleApplication2
             Strike
         }
 
-
-        private FileEditorOpenXml()
-        {
-
-        }
-
-        private static FileEditorOpenXml _instance;
-
-        public static FileEditorOpenXml GetInstance()
-        {
-            if (_instance == null)
-            {
-                _instance = new FileEditorOpenXml();
-            }
-            return _instance;
-        }
-
+        
         public static void EditFile(string inputFilePath, string outputFilePath)
         {
-            if(File.Exists(outputFilePath))
+            if(LoadFile(inputFilePath, outputFilePath))
             {
-                File.Delete(outputFilePath);
+                wpDoc = WordprocessingDocument.Open(outputFilePath, true);
+
+                body = wpDoc.MainDocumentPart.Document.Body;
+
+                tab = body.Elements<Table>().ElementAt(1);
+
+                rProp = SetFormatting("Arial", 18);
+
+                FillCells();
+                FormatCells();
+                MergeCells();
+
+                try
+                {
+                    wpDoc.Close();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
-            File.Copy(inputFilePath, outputFilePath);
+        }
 
-            wpDoc = WordprocessingDocument.Open(outputFilePath, true);
-
-            body = wpDoc.MainDocumentPart.Document.Body;
-
-            tab = body.Elements<Table>().ElementAt(1);
-
-            rProp = SetFormatting("Arial", 18);
-
-            FillCells();
-            FormatCells();
-            MergeCells();
-
-            // wpDoc.SaveAs(outputFilePath);
-
-            wpDoc.Close();
-
-            Console.WriteLine("");
+        private static Boolean LoadFile(string inputFilePath, string outputFilePath)
+        {
+            try
+            {
+                if (File.Exists(outputFilePath))
+                {
+                    File.Delete(outputFilePath);
+                }
+                File.Copy(inputFilePath, outputFilePath);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
         }
 
         private static void FillCells()
