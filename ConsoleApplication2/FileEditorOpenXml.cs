@@ -38,7 +38,8 @@ namespace ConsoleApplication2
 
                 FillCells();
                 FormatCells();
-                MergeCells();
+                MergeCellsInColumn(0);
+                // MergeCells();
 
                 try
                 {
@@ -82,12 +83,6 @@ namespace ConsoleApplication2
             FormatCell(1, 2, new FStyle[] { FStyle.Italic } );
             FormatCell(4, 1, new FStyle[] { FStyle.Strike } );
             FormatCell(4, 4, new FStyle[] { FStyle.Bold } );
-        }
-
-        private static void MergeCells()                                                        // Merges cells
-        {
-            CellsToMerge(0, 1, 3);
-            CellsToMerge(0, 4, 6);
         }
 
         private static void InputTextIntoRow (int row, string docName, string docType, int qty, string comment)
@@ -148,31 +143,6 @@ namespace ConsoleApplication2
             }
         }
 
-        private static void CellsToMerge(int col, int rowStart, int rowEnd)                     // Merges a range of cells 
-        {
-            TableCellProperties tcPropStart = new TableCellProperties();
-            tcPropStart.Append(new VerticalMerge()
-            {
-                Val = MergedCellValues.Restart
-            });
-
-            TableCellProperties tcPropNext = new TableCellProperties();
-            tcPropNext.Append(new VerticalMerge()
-            {
-                Val = MergedCellValues.Continue
-            });
-
-            TableCell tCell = tab.Elements<TableRow>().ElementAt(rowStart).Elements<TableCell>().ElementAt(col);
-            tCell.Append(tcPropStart);
-
-            for (int i = rowStart + 1; i <= rowEnd; i++)
-            {
-                tCell = tab.Elements<TableRow>().ElementAt(i).Elements<TableCell>().ElementAt(col);
-                tCell.Append(tcPropNext.CloneNode(true));
-            }
-
-        }
-
         private static RunProperties SetFormatting(string fontStyle, int fontSize)              // Sets cell text formatting
         {
             RunProperties rPr = new RunProperties();
@@ -188,6 +158,50 @@ namespace ConsoleApplication2
             };
 
             return rPr;
+        }
+
+        private static void MergeCellsInColumn (int col)
+        {
+            TableCell tCell;
+
+            TableCellProperties tcPropStart = new TableCellProperties();
+            tcPropStart.Append(new VerticalMerge()
+            {
+                Val = MergedCellValues.Restart
+            });
+
+            TableCellProperties tcPropNext = new TableCellProperties();
+            tcPropNext.Append(new VerticalMerge()
+            {
+                Val = MergedCellValues.Continue
+            });
+
+            foreach(TableRow tRow in tab.Elements<TableRow>())
+            {
+                tCell = tRow.Elements<TableCell>().ElementAt(col);
+
+                if(IsEmptyCell(tCell))
+                {
+                    tCell.Append(tcPropNext.CloneNode(true));
+                }
+                else
+                {
+                    tCell.Append(tcPropStart.CloneNode(true));
+                }
+            }
+        }
+
+        private static Boolean IsEmptyCell(TableCell tCell)
+        {
+            try 
+            {
+                Text txt = tCell.Elements<Paragraph>().First().Elements<Run>().First().Elements<Text>().First();
+            }
+            catch (Exception e)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
